@@ -15,7 +15,7 @@ setup(
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
     description="My solution for kaggle disasters tweet competition",
-    long_description=long_description,
+    long_description="",
     long_description_content_type="text/markdown",
     author="kiccho1101",
     license="MIT License",
