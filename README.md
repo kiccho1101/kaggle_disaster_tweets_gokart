@@ -10,7 +10,7 @@ pipenv install --dev --skip-lock
 
 ## Step2. Download train.csv, test.csv
 
-Put them in ./data directory.
+Put them in ./nlp-getting-started directory.
 
 ## Step3. Start up luigi server (in other terminal window)
 
