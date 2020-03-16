@@ -21,7 +21,7 @@ luigid
 ## Step4. Run the code
 
 ```bash
-python main.py kaggle_disaster_tweets_gokart.CrossValidation
+python main.py tweet.CrossValidation
 ```
 
 ## Test
