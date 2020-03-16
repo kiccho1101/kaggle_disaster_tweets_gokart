@@ -1,16 +1,31 @@
 # kaggle_disaster_tweets_gokart
 
-What's this project?
+My solution for Kaggle Tweet Competition (https://www.kaggle.com/c/nlp-getting-started)
 
+## Step1. Set up environments with pipenv
 
-# Run
-
+```bash
+pipenv install --dev --skip-lock
 ```
-python main.py kaggle_disaster_tweets_gokart.Sample --local-scheduler
+
+## Step2. Download train.csv, test.csv
+
+Put them in ./data directory.
+
+## Step3. Start up luigi server (in other terminal window)
+
+```bash
+luigid
 ```
 
-# Test
+## Step4. Run the code
 
+```bash
+python main.py kaggle_disaster_tweets_gokart.CrossValidation
 ```
+
+## Test
+
+```bash
 python -m unittest discover -s ./test/unit_test/
 ```
