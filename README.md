@@ -2,6 +2,10 @@
 
 My solution for Kaggle Tweet Competition (https://www.kaggle.com/c/nlp-getting-started)
 
+## Ponchi
+
+![Alt text](img/ponchi.png?raw=true "Ponchi")
+
 ## Step1. Set up environments with pipenv
 
 ```bash

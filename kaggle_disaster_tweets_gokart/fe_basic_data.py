@@ -8,7 +8,7 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.tasks.preprocess_data import (
+from kaggle_disaster_tweets_gokart.preprocess_data import (
     PreprocessTrainData,
     PreprocessTestData,
 )

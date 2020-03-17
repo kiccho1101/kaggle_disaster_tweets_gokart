@@ -3,7 +3,7 @@ import pandas as pd
 from typing import Dict
 
 from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.tasks.load_data import (
+from kaggle_disaster_tweets_gokart.load_data import (
     LoadTrainData,
     LoadTestData,
 )
