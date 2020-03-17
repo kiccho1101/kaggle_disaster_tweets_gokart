@@ -2,8 +2,7 @@ from logging import getLogger
 from typing import Dict, List
 import pandas as pd
 import sklearn
-from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.tasks.make_feature_data import MakeTrainFeatureData
+from kaggle_disaster_tweets_gokart import Tweet, MakeTrainSelectedFeatureData
 
 
 logger = getLogger(__name__)
@@ -11,7 +10,7 @@ logger = getLogger(__name__)
 
 class SplitTrainData(Tweet):
     def requires(self):
-        return MakeTrainFeatureData()
+        return MakeTrainSelectedFeatureData()
 
     def run(self):
         df: pd.DataFrame = self.load()

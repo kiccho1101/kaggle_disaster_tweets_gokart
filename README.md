@@ -8,20 +8,30 @@ My solution for Kaggle Tweet Competition (https://www.kaggle.com/c/nlp-getting-s
 pipenv install --dev --skip-lock
 ```
 
-## Step2. Download train.csv, test.csv
+## Step2. Download train.csv, test.csv, sample_submission.csv
 
 Put them in ./nlp-getting-started directory.
 
-## Step3. Start up luigi server (in other terminal window)
+## Step3. Start up luigi / mlflow server (in other terminal windows)
 
 ```bash
 luigid
 ```
 
-## Step4. Run the code
+```bash
+mlflow ui
+```
+
+## Step4. Run cross validation
 
 ```bash
-python main.py tweet.CrossValidation
+pipenv run python main.py tweet.CrossValidation
+```
+
+## Step5. Create submission file
+
+```bash
+pipenv run python main.py tweet.CreateSubmissionFile
 ```
 
 ## Test

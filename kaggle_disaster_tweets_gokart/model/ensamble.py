@@ -6,7 +6,7 @@ from lightgbm import LGBMClassifier
 logging = getLogger(__name__)
 
 
-class EnsambleModel:
+class ModelWrapper:
     def __init__(
         self,
         model,
@@ -28,11 +28,11 @@ class EnsambleModel:
         return self.model.predict(x), self.model.predict_proba(x)
 
 
-class Ensamble:
+class EnsambleModel:
     def __init__(
-        self, models: List[EnsambleModel],
+        self, models: List[ModelWrapper],
     ):
-        self.models: List[EnsambleModel] = models
+        self.models: List[ModelWrapper] = models
 
     def fit(self, x: List[List[float]], y: List[List[float]]) -> None:
         for model in self.models:
@@ -42,11 +42,17 @@ class Ensamble:
         self, x: List[List[float]]
     ) -> Tuple[List[List[float]], List[List[float]]]:
         return (
-            np.sum(
-                [model.weight * np.array(model.predict(x)[0]) for model in self.models],
-                axis=0,
-            )
-            / np.sum([model.weight for model in self.models]),
+            (
+                np.sum(
+                    [
+                        model.weight * np.array(model.predict(x)[0])
+                        for model in self.models
+                    ],
+                    axis=0,
+                )
+                / np.sum([model.weight for model in self.models])
+                >= 0.5
+            ).astype(int),
             np.sum(
                 [model.weight * np.array(model.predict(x)[1]) for model in self.models],
                 axis=0,

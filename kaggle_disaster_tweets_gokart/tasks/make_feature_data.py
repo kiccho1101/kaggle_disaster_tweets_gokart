@@ -11,6 +11,8 @@ from kaggle_disaster_tweets_gokart import (
     FEBasicTestData,
     FELikelyWordTrain,
     FELikelyWordTest,
+    FEBertTrain,
+    FEBertTest,
 )
 
 
@@ -25,6 +27,7 @@ class MakeTrainFeatureData(Tweet):
             pp_df=PreprocessTrainData(),
             fe_basic_df=FEBasicTrainData(),
             fe_likely_word_df=FELikelyWordTrain(),
+            fe_bert_df=FEBertTrain(),
         )
 
     def run(self):
@@ -33,6 +36,7 @@ class MakeTrainFeatureData(Tweet):
                 self.load("pp_df")["target"],
                 self.load("fe_basic_df"),
                 self.load("fe_likely_word_df"),
+                self.load("fe_bert_df"),
             ],
             axis=1,
         )
@@ -51,11 +55,17 @@ class MakeTestFeatureData(Tweet):
             pp_df=PreprocessTestData(),
             fe_basic_df=FEBasicTestData(),
             fe_likely_word_df=FELikelyWordTest(),
+            fe_bert_df=FEBertTest(),
         )
 
     def run(self):
         df: pd.DataFrame = pd.concat(
-            [self.load("fe_basic_df"), self.load("fe_likely_word_df")], axis=1
+            [
+                self.load("fe_basic_df"),
+                self.load("fe_likely_word_df"),
+                self.load("fe_bert_df"),
+            ],
+            axis=1,
         )
         selected_cols: List[str] = []
         for select_col in self.select_cols:

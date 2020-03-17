@@ -41,6 +41,7 @@ matplotlib = "*"
 plotly = "*"
 pandas-profiling = {extras = ["html", "notebook"],version = "*"}
 nltk = "*"
+mlflow = "*"
 
 [requires]
 python_version = "3.7"

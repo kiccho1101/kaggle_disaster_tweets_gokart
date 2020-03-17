@@ -24,7 +24,7 @@ np.random.seed(42)
 
 
 # %%
-gokart.run(["tweet.FELikelyWordTest", "--rerun"])
+gokart.run(["tweet.MakeEnsembleModel", "--rerun"])
 
 
 # %%
@@ -34,7 +34,12 @@ tb = Thunderbolt("./resource")
 tb.get_task_df()
 
 # %%
-tb.get_data("MakeTrainFeatureData")
+import sklearn.ensemble
+model: sklearn.ensemble.StackingClassifier = tb.get_data("MakeEnsembleModel")
 
 
 # %%
+pd.read_pickle("./resource/cv_result.pkl")
+
+# %%
+model.estimators
