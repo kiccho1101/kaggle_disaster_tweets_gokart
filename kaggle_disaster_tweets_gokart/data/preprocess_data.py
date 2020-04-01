@@ -2,11 +2,7 @@ from logging import getLogger
 import pandas as pd
 from typing import Dict
 
-from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.load_data import (
-    LoadTrainData,
-    LoadTestData,
-)
+from kaggle_disaster_tweets_gokart import Tweet, LoadTrainData, LoadTestData
 
 
 logger = getLogger(__name__)

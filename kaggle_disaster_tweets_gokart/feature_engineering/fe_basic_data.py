@@ -3,17 +3,19 @@ from logging import getLogger
 import pandas as pd
 
 import re
+import regex
+import swifter
 import numpy as np
 import string
 import nltk
 from nltk.corpus import stopwords
-from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.preprocess_data import (
-    PreprocessTrainData,
-    PreprocessTestData,
-)
+from kaggle_disaster_tweets_gokart import Tweet, PreprocessTrainData, PreprocessTestData
 
 logger = getLogger(__name__)
+
+
+def get_regex_num(pattern: str, text: str):
+    return len(regex.compile(pattern).findall(text))
 
 
 def fe_basic(df: pd.DataFrame):
@@ -45,9 +47,35 @@ def fe_basic(df: pd.DataFrame):
     df[prefix + "avg_word_num"] = df["text"].map(
         lambda x: np.mean([len(word) for word in x.split()])
     )
-    df = df.drop(["id", "keyword", "location", "text", "text_preprocessed"], axis=1)
-    if "target" in df.columns:
-        df = df.drop("target", axis=1)
+
+    df[prefix + "number_num"] = df["text_preprocessed"].swifter.apply(
+        lambda x: get_regex_num(r"\<NUMBER\>", x)
+    )
+    df[prefix + "user_num"] = df["text_preprocessed"].swifter.apply(
+        lambda x: get_regex_num(r"\<USER\>", x)
+    )
+    df[prefix + "earthquake_num"] = (
+        df["text_preprocessed"]
+        .str.lower()
+        .swifter.apply(lambda x: get_regex_num(r"earthquake", x))
+    )
+    df[prefix + "flood_num"] = (
+        df["text_preprocessed"]
+        .str.lower()
+        .swifter.apply(lambda x: get_regex_num(r"flood", x))
+    )
+    df[prefix + "face_num"] = df["text_preprocessed"].swifter.apply(
+        lambda x: get_regex_num(r"FACE\>", x)
+    )
+    df[prefix + "repeat_num"] = df["text_preprocessed"].swifter.apply(
+        lambda x: get_regex_num(r"\<REPEAT\>", x)
+    )
+    for char in list("abcdefghijklmnopqrstuvwxyz"):
+        df[prefix + f"{char}_num"] = (
+            df["text"].str.lower().swifter.apply(lambda x: get_regex_num(char, x))
+        )
+
+    df = df.filter(like="fe_basic_")
     return df
 
 

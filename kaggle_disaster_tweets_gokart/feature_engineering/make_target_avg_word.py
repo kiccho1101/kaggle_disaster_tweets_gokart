@@ -4,8 +4,7 @@ from tqdm import tqdm
 import pandas as pd
 from typing import List
 
-from kaggle_disaster_tweets_gokart.base import Tweet
-from kaggle_disaster_tweets_gokart.preprocess_data import PreprocessTrainData
+from kaggle_disaster_tweets_gokart import Tweet, PreprocessTrainData
 
 logger = getLogger(__name__)
 

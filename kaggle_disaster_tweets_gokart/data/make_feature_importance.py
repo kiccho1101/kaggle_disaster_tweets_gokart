@@ -15,9 +15,11 @@ class MakeFeatureImportance(Tweet):
         df: pd.DataFrame = self.load()
 
         model = LGBMClassifier(
-            boosting_type="gbdt", num_leaves=260, learning_rate=0.0798, n_estimators=200
+            boosting_type="gbdt",
+            num_leaves=260,
+            learning_rate=0.04424,
+            feature_fraction=0.0871,
         )
-        logger.info("df shape: {}".format(df.shape))
         model.fit(df.drop("target", axis=1).values, df["target"])
         importance = pd.DataFrame(
             {

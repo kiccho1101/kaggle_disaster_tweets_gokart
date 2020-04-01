@@ -27,8 +27,9 @@ class CreateSubmissionFile(Tweet):
         model.fit(dftrain.drop("target", axis=1).values, dftrain["target"])
         df["target"] = model.predict(dftest.values)
 
-        submission_file_prefix: str = "./output/submission_{}".format(
-            datetime.datetime.now().strftime("%Y-%m-%d")
+        submission_file_prefix: str = "./output/submission_{}_{}".format(
+            datetime.datetime.now().strftime("%Y-%m-%d"),
+            "_".join([m[0] for m in model.estimators]),
         )
         submission_no = len(glob.glob(submission_file_prefix + "_*.csv")) + 1
         submission_file_name = "{}_{}.csv".format(submission_file_prefix, submission_no)
