@@ -1,6 +1,6 @@
 # kaggle_disaster_tweets_gokart
 
-My solution for Kaggle Tweet Competition (https://www.kaggle.com/c/nlp-getting-started)
+My solution for Kaggle Tweet Competition (PB Score: 0.83640) (https://www.kaggle.com/c/nlp-getting-started)
 
 ## Ponchi
 
